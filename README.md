@@ -4,3 +4,4 @@ Kampüs Etkinlikleri uygulamasının yalnızca anlamsal (semantic) HTML kullanı
 
 ## Canlı Bağlantı
 - Vercel URL: Buraya Vercel linkinizi yapıştıracaksınız
+https://html-chi-bay-56.vercel.app/

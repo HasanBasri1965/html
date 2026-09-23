@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Etkinlik Güncelle</title>
+</head>
+<body>
+
+  <header>
+    <h1>Etkinlik Güncelle</h1>
+    <nav>
+      <a href="index.html">Ana Sayfa</a> |
+      <a href="etkinlikler.html">Etkinlikler</a> |
+      <a href="etkinlik-detay.html">Detay</a> |
+      <a href="etkinlik-ekle.html">Ekle</a>
+    </nav>
+  </header>
+
+  <main>
+    <form action="#" method="post">
+      <p>
+        <label for="guncelle-etkinlik-adi">Etkinlik Adı:</label><br>
+        <input type="text" id="guncelle-etkinlik-adi" name="etkinlik-adi" value="Kariyer Günleri 2026" required>
+      </p>
+
+      <p>
+        <label for="guncelle-kategori">Kategori:</label><br>
+        <select id="guncelle-kategori" name="kategori" required>
+          <option value="seminer" selected>Seminer</option>
+          <option value="atolye">Atölye</option>
+          <option value="konferans">Konferans</option>
+        </select>
+      </p>
+
+      <p>
+        <label for="guncelle-tarih-saat">Tarih / Saat:</label><br>
+        <input type="datetime-local" id="guncelle-tarih-saat" name="tarih-saat" value="2026-10-12T14:00" required>
+      </p>
+
+      <p>
+        <label for="guncelle-yer">Yer:</label><br>
+        <input type="text" id="guncelle-yer" name="yer" value="A Blok Konferans Salonu" required>
+      </p>
+
+      <p>
+        <label for="guncelle-aciklama">Açıklama:</label><br>
+        <textarea id="guncelle-aciklama" name="aciklama" rows="4" cols="40" required>Sektör liderleri ile buluşma ve mülakat simülasyonları gerçekleştirilecektir.</textarea>
+      </p>
+
+      <p>
+        <button type="submit">Güncelle</button>
+      </p>
+    </form>
+  </main>
+
+  <footer>
+    <p>Ad Soyad · 20xxxxxxx · 2026</p>
+  </footer>
+
+</body>
+</html>

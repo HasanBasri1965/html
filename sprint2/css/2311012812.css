@@ -21,7 +21,7 @@ body {
   color: #222;
 }
 
-/* Üst Başlık ve Navigasyon */
+
 header {
   background-color: var(--renk-ana);
   color: #fff;
@@ -46,7 +46,7 @@ nav a:hover {
   text-decoration: underline;
 }
 
-/* Kartlar ve Grid Yapısı (Öncelik Mobil: Tek Sütun) */
+
 .etkinlik-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -72,7 +72,7 @@ article.kart a {
   text-decoration: none;
 }
 
-/* Detay Sayfası İki Kolon / Künye Alanı */
+
 .detay-konteyner {
   display: flex;
   flex-direction: column;
@@ -96,7 +96,7 @@ article.kart a {
   padding: var(--bosluk-m);
 }
 
-/* Formlar ve Hata Durumları */
+
 form {
   background: #fff;
   border-radius: var(--kose);
@@ -118,7 +118,7 @@ input, select, textarea {
   font-family: inherit;
 }
 
-/* Slayt şartı: Hatalı/Boş gönderilen required alanlar kırmızı çerçeve */
+
 input:invalid:focus, textarea:invalid:focus, select:invalid:focus {
   border-color: #e53e3e;
   outline: none;
@@ -136,7 +136,7 @@ button {
   width: 100%;
 }
 
-/* Masaüstü Ekranlar (Geniş Ekran) */
+
 @media (min-width: 768px) {
   .etkinlik-grid.uc-kolon {
     grid-template-columns: repeat(3, 1fr);
@@ -157,4 +157,13 @@ button {
   button {
     width: auto;
   }
+  /* Afiş görseli stilleri */
+.afis-resmi {
+  width: 100%;
+  max-width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: var(--kose);
+  display: block;
+}
 }

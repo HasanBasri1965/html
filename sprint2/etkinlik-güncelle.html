@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/2311012812.css">
 </head>
 <body>
+
   <header>
     <h1>Etkinlik Güncelle</h1>
     <nav>
@@ -19,23 +20,29 @@
 
   <main>
     <form action="#" method="post">
-      <label for="g-etkinlik-adi">Etkinlik adı</label>
-      <input type="text" id="g-etkinlik-adi" value="Kariyer Günleri 2026" required>
+      <label for="g-adi">Etkinlik adı</label>
+      <input type="text" id="g-adi" name="etkinlik-adi" value="Kariyer Günleri 2026" required>
 
-      <label for="g-kategori">Kategori</label>
-      <select id="g-kategori" required>
+      <label for="g-kat">Kategori</label>
+      <select id="g-kat" name="kategori" required>
         <option value="seminer" selected>Seminer</option>
         <option value="atolye">Atölye</option>
+        <option value="soylesi">Söyleşi</option>
       </select>
 
       <label for="g-tarih">Tarih</label>
-      <input type="text" id="g-tarih" value="12.10.2026" required>
+      <input type="text" id="g-tarih" name="tarih" value="12.10.2026" required>
 
       <label for="g-aciklama">Açıklama</label>
-      <textarea id="g-aciklama" rows="3" required>Mezun söyleşisi</textarea>
+      <textarea id="g-aciklama" name="aciklama" rows="3" required>Mezun söyleşileri</textarea>
 
       <button type="submit">Güncelle</button>
     </form>
   </main>
+
+  <footer>
+    <p>Ad Soyad · 2311012812 · 2026</p>
+  </footer>
+
 </body>
 </html>

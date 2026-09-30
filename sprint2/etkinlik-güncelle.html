@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etkinlik Güncelle</title>
+  <link rel="stylesheet" href="css/2311012812.css">
+</head>
+<body>
+  <header>
+    <h1>Etkinlik Güncelle</h1>
+    <nav>
+      <a href="index.html">Ana Sayfa</a>
+      <a href="etkinlikler.html">Etkinlikler</a>
+      <a href="etkinlik-ekle.html">Ekle</a>
+      <a href="etkinlik-guncelle.html">Güncelle</a>
+    </nav>
+  </header>
+
+  <main>
+    <form action="#" method="post">
+      <label for="g-etkinlik-adi">Etkinlik adı</label>
+      <input type="text" id="g-etkinlik-adi" value="Kariyer Günleri 2026" required>
+
+      <label for="g-kategori">Kategori</label>
+      <select id="g-kategori" required>
+        <option value="seminer" selected>Seminer</option>
+        <option value="atolye">Atölye</option>
+      </select>
+
+      <label for="g-tarih">Tarih</label>
+      <input type="text" id="g-tarih" value="12.10.2026" required>
+
+      <label for="g-aciklama">Açıklama</label>
+      <textarea id="g-aciklama" rows="3" required>Mezun söyleşisi</textarea>
+
+      <button type="submit">Güncelle</button>
+    </form>
+  </main>
+</body>
+</html>

@@ -19,9 +19,10 @@ body {
   margin: 0;
   padding: var(--bosluk-m);
   color: #222;
+  overflow-x: hidden; /* Telefonda yatay taşmayı kesinlikle engeller */
 }
 
-
+/* Üst Başlık ve Navigasyon */
 header {
   background-color: var(--renk-ana);
   color: #fff;
@@ -35,18 +36,23 @@ header h1 {
   font-size: 1.5rem;
 }
 
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
 nav a {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
-  margin-right: 0.8rem;
 }
 
 nav a:hover {
   text-decoration: underline;
 }
 
-
+/* Kartlar ve Grid Yapısı (Öncelik Mobil: Tek Sütun) */
 .etkinlik-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -61,7 +67,8 @@ article.kart {
   padding: var(--bosluk-m);
 }
 
-article.kart h2, article.kart h3 {
+article.kart h2, 
+article.kart h3 {
   margin-top: 0;
   color: var(--renk-ana);
 }
@@ -72,21 +79,36 @@ article.kart a {
   text-decoration: none;
 }
 
-
+/* Detay Sayfası İki Kolon / Künye Alanı */
 .detay-konteyner {
   display: flex;
   flex-direction: column;
   gap: var(--bosluk-m);
+  width: 100%;
+  max-width: 100%;
 }
 
-.afis-kutusu {
-  background: #e2e8f0;
+.detay-konteyner figure {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Afiş Görseli: Ekrana tam sığar, asla taşma yapmaz */
+.afis-resmi {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
   border-radius: var(--kose);
-  min-height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
+  display: block;
+}
+
+.detay-konteyner figcaption {
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  color: #555;
 }
 
 .kunye-kutusu {
@@ -94,13 +116,33 @@ article.kart a {
   border: 1px solid #ddd;
   border-radius: var(--kose);
   padding: var(--bosluk-m);
+  width: 100%;
+  max-width: 100%;
 }
 
+.kunye-kutusu dl {
+  margin: 0;
+}
 
+.kunye-kutusu dt {
+  margin-top: 0.5rem;
+}
+
+.kunye-kutusu dt:first-child {
+  margin-top: 0;
+}
+
+.kunye-kutusu dd {
+  margin-left: 0;
+  margin-bottom: 0.5rem;
+}
+
+/* Formlar ve Hata Durumları */
 form {
   background: #fff;
   border-radius: var(--kose);
   padding: var(--bosluk-m);
+  border: 1px solid #ddd;
 }
 
 label {
@@ -109,7 +151,9 @@ label {
   margin-bottom: 0.3rem;
 }
 
-input, select, textarea {
+input, 
+select, 
+textarea {
   width: 100%;
   padding: 0.6rem;
   border: 1px solid #ccc;
@@ -118,8 +162,10 @@ input, select, textarea {
   font-family: inherit;
 }
 
-
-input:invalid:focus, textarea:invalid:focus, select:invalid:focus {
+/* Slayt şartı: Hatalı veya boş required alanlar kırmızı çerçeve */
+input:invalid:focus, 
+textarea:invalid:focus, 
+select:invalid:focus {
   border-color: #e53e3e;
   outline: none;
   background-color: #fff5f5;
@@ -136,7 +182,7 @@ button {
   width: 100%;
 }
 
-
+/* Masaüstü Ekranlar (Geniş Ekran) */
 @media (min-width: 768px) {
   .etkinlik-grid.uc-kolon {
     grid-template-columns: repeat(3, 1fr);
@@ -148,22 +194,21 @@ button {
 
   .detay-konteyner {
     flex-direction: row;
+    align-items: stretch;
   }
 
-  .detay-konteyner > * {
+  .detay-konteyner figure,
+  .detay-konteyner .kunye-kutusu {
     flex: 1;
+    min-width: 0; /* İçeriğin kutuyu dışarı itmesini önler */
+  }
+
+  .afis-resmi {
+    height: 100%;
+    min-height: 220px;
   }
 
   button {
     width: auto;
   }
-  /* Afiş görseli stilleri */
-.afis-resmi {
-  width: 100%;
-  max-width: 100%;
-  height: 220px;
-  object-fit: cover;
-  border-radius: var(--kose);
-  display: block;
-}
 }

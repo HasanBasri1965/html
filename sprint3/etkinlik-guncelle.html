@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etkinlik Güncelle</title>
+  <link rel="stylesheet" href="css/2311012812.css">
+  <script type="module" src="js/event-form.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Etkinlik Güncelle</h1>
+    <nav>
+      <a href="index.html">Ana Sayfa</a>
+      <a href="etkinlikler.html">Etkinlikler</a>
+      <a href="etkinlik-ekle.html">Ekle</a>
+    </nav>
+  </header>
+
+  <main>
+    <p><small>Alanlar mevcut etkinliğin bilgileriyle dolu gelir. Bu sprintte form veri güncellemez.</small></p>
+
+    <form id="etkinlik-formu" data-mode="guncelle" novalidate>
+      <p>
+        <label for="ad">Etkinlik Adı *</label>
+        <input type="text" id="ad" name="ad">
+        <span id="ad-hata" class="hata-yazisi"></span>
+      </p>
+
+      <p>
+        <label for="kategori">Kategori *</label>
+        <select id="kategori" name="kategori">
+          <option value="">Seçiniz</option>
+          <option value="Seminer">Seminer</option>
+          <option value="Atölye">Atölye</option>
+          <option value="Söyleşi">Söyleşi</option>
+        </select>
+        <span id="kategori-hata" class="hata-yazisi"></span>
+      </p>
+
+      <p>
+        <label for="tarih">Tarih *</label>
+        <input type="date" id="tarih" name="tarih">
+        <span id="tarih-hata" class="hata-yazisi"></span>
+      </p>
+
+      <p>
+        <label for="saat">Saat *</label>
+        <input type="time" id="saat" name="saat">
+        <span id="saat-hata" class="hata-yazisi"></span>
+      </p>
+
+      <p>
+        <label for="yer">Yer *</label>
+        <input type="text" id="yer" name="yer">
+        <span id="yer-hata" class="hata-yazisi"></span>
+      </p>
+
+      <p>
+        <label for="kontenjan">Kontenjan</label>
+        <input type="number" id="kontenjan" name="kontenjan">
+        <span id="kontenjan-hata" class="hata-yazisi"></span>
+      </p>
+
+      <p>
+        <label for="aciklama">Açıklama</label>
+        <textarea id="aciklama" name="aciklama" rows="3"></textarea>
+      </p>
+
+      <button type="submit" class="btn">Güncelle</button>
+    </form>
+
+    <div id="form-mesaj"></div>
+  </main>
+
+  <footer>
+    <p>Hasan Basri Kaplan · 2311012812 · 2026</p>
+  </footer>
+</body>
+</html>

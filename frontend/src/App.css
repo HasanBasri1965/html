@@ -1,0 +1,222 @@
+/* Hasan Basri - 2311012812 */
+:root {
+  --no: 2311012812;
+  --ton: mod(var(--no), 360);
+  --renk-ana: hsl(212 65% 38%);
+  --renk-zemin: hsl(212 30% 97%);
+  --font: Tahoma, sans-serif;
+  --bosluk-m: 1rem;
+  --kose: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background-color: var(--renk-zemin);
+  margin: 0;
+  padding: var(--bosluk-m);
+  color: #222;
+  overflow-x: hidden; /* Telefonda yatay taşmayı kesinlikle engeller */
+}
+
+/* Üst Başlık ve Navigasyon */
+header {
+  background-color: var(--renk-ana);
+  color: #fff;
+  padding: var(--bosluk-m);
+  border-radius: var(--kose);
+  margin-bottom: var(--bosluk-m);
+}
+
+header h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Kartlar ve Grid Yapısı (Öncelik Mobil: Tek Sütun) */
+.etkinlik-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--bosluk-m);
+  margin-bottom: var(--bosluk-m);
+}
+
+article.kart {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: var(--kose);
+  padding: var(--bosluk-m);
+}
+
+article.kart h2, 
+article.kart h3 {
+  margin-top: 0;
+  color: var(--renk-ana);
+}
+
+article.kart a {
+  color: var(--renk-ana);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Detay Sayfası İki Kolon / Künye Alanı */
+.detay-konteyner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bosluk-m);
+  width: 100%;
+  max-width: 100%;
+}
+
+.detay-konteyner figure {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Afiş Görseli: Ekrana tam sığar, asla taşma yapmaz */
+.afis-resmi {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--kose);
+  display: block;
+}
+
+.detay-konteyner figcaption {
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.kunye-kutusu {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: var(--kose);
+  padding: var(--bosluk-m);
+  width: 100%;
+  max-width: 100%;
+}
+
+.kunye-kutusu dl {
+  margin: 0;
+}
+
+.kunye-kutusu dt {
+  margin-top: 0.5rem;
+}
+
+.kunye-kutusu dt:first-child {
+  margin-top: 0;
+}
+
+.kunye-kutusu dd {
+  margin-left: 0;
+  margin-bottom: 0.5rem;
+}
+
+/* Formlar ve Hata Durumları */
+form {
+  background: #fff;
+  border-radius: var(--kose);
+  padding: var(--bosluk-m);
+  border: 1px solid #ddd;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+input, 
+select, 
+textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: var(--kose);
+  margin-bottom: var(--bosluk-m);
+  font-family: inherit;
+}
+
+/* Slayt şartı: Hatalı veya boş required alanlar kırmızı çerçeve */
+input:invalid:focus, 
+textarea:invalid:focus, 
+select:invalid:focus {
+  border-color: #e53e3e;
+  outline: none;
+  background-color: #fff5f5;
+}
+
+button {
+  background-color: var(--renk-ana);
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--kose);
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Masaüstü Ekranlar (Geniş Ekran) */
+@media (min-width: 768px) {
+  .etkinlik-grid.uc-kolon {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .etkinlik-grid.iki-kolon {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .detay-konteyner {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .detay-konteyner figure,
+  .detay-konteyner .kunye-kutusu {
+    flex: 1;
+    min-width: 0; /* İçeriğin kutuyu dışarı itmesini önler */
+  }
+
+  .afis-resmi {
+    height: 100%;
+    min-height: 220px;
+  }
+
+  button {
+    width: auto;
+  }
+  .hata-kutusu {
+  background-color: #fff5f5;
+  border: 1px solid #e53e3e;
+  border-radius: var(--kose);
+  padding: var(--bosluk-m);
+  color: #c53030;
+  margin-bottom: var(--bosluk-m);
+}
+}

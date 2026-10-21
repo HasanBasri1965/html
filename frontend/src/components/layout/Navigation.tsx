@@ -19,6 +19,7 @@ function Navigation({ current, onNavigate }: NavigationProps) {
         <a
           key={item.name}
           href={`#${item.name}`}
+          className={current === item.name ? "aktif" : ""}
           aria-current={current === item.name ? "page" : undefined}
           onClick={(e) => {
             e.preventDefault();

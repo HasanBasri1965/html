@@ -23,12 +23,3 @@ export function searchEvents(events: CampusEvent[], text: string): CampusEvent[]
 export function filterEvents(events: CampusEvent[], category: Category | ""): CampusEvent[] {
   return filterByCategory(events, category);
 }
-
-
-export function searchEvents(events: CampusEvent[], text: string): CampusEvent[] {
-  return filterBySearch(events, text);
-}
-
-export function filterEvents(events: CampusEvent[], category: Category | ""): CampusEvent[] {
-  return filterByCategory(events, category);
-}

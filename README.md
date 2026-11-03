@@ -1,6 +1,6 @@
 # Kampüs Etkinlikleri — Sprint 5 (React + TypeScript + React Router)
 
-**Canlı Link:** https://html-d4em.vercel.app/
+**Canlı Link:** https://hasanbasrikaplan-frontend.vercel.app/
 
 **GitHub Deposu:** https://github.com/HasanBasri1965/html
 

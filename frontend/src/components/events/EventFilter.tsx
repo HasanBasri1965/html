@@ -1,39 +1,37 @@
 // src/components/events/EventFilter.tsx
-import type { Category } from "../../types/campus-event";
-
-interface EventFilterProps {
+interface Props {
   searchText: string;
-  category: Category | "";
-  categories: Category[];
-  onSearchChange: (text: string) => void;
-  onCategoryChange: (cat: Category | "") => void;
+  onSearchChange: (value: string) => void;
+  category: string;
+  categories: string[];
+  onCategoryChange: (value: string) => void;
 }
 
-function EventFilter({
+export default function EventFilter({
   searchText,
+  onSearchChange,
   category,
   categories,
-  onSearchChange,
-  onCategoryChange,
-}: EventFilterProps) {
+  onCategoryChange
+}: Props) {
   return (
-    <form className="filtre" onSubmit={(e) => e.preventDefault()}>
-      <div>
+    <form className="filtre" role="search" onSubmit={(e) => e.preventDefault()}>
+      <p className="alan">
         <label htmlFor="arama">Etkinlik ara</label>
         <input
           type="search"
           id="arama"
-          placeholder="Örn: atölye, kariyer..."
+          placeholder="Örn. atölye, kariyer"
           value={searchText}
           onChange={(e) => onSearchChange(e.target.value)}
         />
-      </div>
-      <div>
+      </p>
+      <p className="alan">
         <label htmlFor="kategori-filtre">Kategori</label>
         <select
           id="kategori-filtre"
           value={category}
-          onChange={(e) => onCategoryChange(e.target.value as Category | "")}
+          onChange={(e) => onCategoryChange(e.target.value)}
         >
           <option value="">Tümü</option>
           {categories.map((cat) => (
@@ -42,9 +40,7 @@ function EventFilter({
             </option>
           ))}
         </select>
-      </div>
+      </p>
     </form>
   );
 }
-
-export default EventFilter;

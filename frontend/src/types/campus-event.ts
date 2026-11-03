@@ -1,4 +1,5 @@
-// frontend/src/types/campus-event.ts
+// src/types/campus-event.ts
+
 export type Category = "Seminer" | "Atölye" | "Söyleşi" | "Yarışma";
 
 export interface CampusEvent {
@@ -11,4 +12,24 @@ export interface CampusEvent {
   location: string;
   description: string;
   image?: string;
+}
+
+export interface EventFormData {
+  title: string;
+  category: Category | "";
+  capacity: string;
+  date: string;
+  time: string;
+  location: string;
+  description: string;
+}
+
+export interface EventFormErrors {
+  title?: string;
+  category?: string;
+  capacity?: string;
+  date?: string;
+  time?: string;
+  location?: string;
+  description?: string;
 }

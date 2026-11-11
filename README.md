@@ -1,14 +1,63 @@
-# Kampüs Etkinlikleri — Sprint 5 (React + TypeScript + React Router)
+# Kampüs Etkinlikleri — Sprint 5 & 7
 
-**Canlı Link:** https://hasanbasrikaplan-frontend.vercel.app/
+**Frontend Canlı Link (Vercel):** https://hasanbasrikaplan-frontend.vercel.app/
 
 **GitHub Deposu:** https://github.com/HasanBasri1965/html
 
 ---
 
-## React Router ile 10 Sayfa (Route)
+## Proje Yapısı
 
-Bu projede `react-router-dom` v7 kullanılarak **10 ayrı route** tanımlanmıştır:
+Bu repoda iki ana uygulama bulunmaktadır:
+
+```
+kampus-etkinlik/
+├── frontend/                  # React + TypeScript + Vite (localhost:5173)
+│   └── src/
+│       ├── components/        # EventCard, EventDetail, EventFilter, EventList, EventForm, Layout
+│       ├── context/           # EventsContext (Global State & CRUD)
+│       ├── data/              # Başlangıç etkinlik verileri
+│       └── pages/             # 10 React Router sayfası
+├── backend/                   # Node.js + Express REST API (localhost:3000)
+│   ├── src/
+│   │   ├── app.js             # Express app, middleware ve route bağlantıları
+│   │   ├── server.js          # Port dinleme ve .env yapılandırması
+│   │   ├── routes/            # event-routes.js
+│   │   ├── controllers/       # event-controller.js
+│   │   └── data/              # events.js (Bellek içi özgün etkinlikler)
+│   ├── requests/              # kampus-api.json (Postman Collection v2.1)
+│   ├── .env.example           # Örnek çevre değişkenleri
+│   ├── .gitignore             # node_modules ve .env koruması
+│   └── README.md              # Backend REST API sözleşmesi ve dokümantasyonu
+```
+
+---
+
+## Backend — Sprint 7 (Express REST API)
+
+Backend, etkinlik verilerini JSON formatında sunan Node.js + Express REST API servisidir.
+
+### REST API Uç Noktaları
+
+| Yöntem | Uç Nokta | Açıklama | Yanıt Kodu |
+|:---|:---|:---|:---|
+| **GET** | `/health` | Sağlık kontrolü ve öğrenci no (`2311012812`) | `200 OK` |
+| **GET** | `/events` | Tüm etkinlik listesi (filtreleme: `?category=...`) | `200 OK` |
+| **GET** | `/events/:id` | Tekil etkinlik detayı | `200 OK` / `404 Not Found` |
+| **POST** | `/events` | Yeni etkinlik ekleme | `201 Created` / `400 Bad Request` |
+
+### Backend Çalıştırma
+```bash
+cd backend
+npm install
+npm run dev     # http://localhost:3000
+```
+
+Postman test koleksiyonu: `backend/requests/kampus-api.json`
+
+---
+
+## Frontend — Sprint 5 (React Router ile 10 Sayfa)
 
 | # | Yol (Path) | Sayfa Bileşeni | Açıklama |
 |---|-----------|----------------|----------|
@@ -24,28 +73,5 @@ Bu projede `react-router-dom` v7 kullanılarak **10 ayrı route** tanımlanmış
 | 10 | `*` | `NotFoundPage` | 404 Sayfa Bulunamadı |
 
 ---
-
-## Teknolojiler
-
-- **React 19** + **TypeScript 6**
-- **Vite 8** (build aracı)
-- **React Router DOM v7** (client-side routing)
-- **Context API** (global state yönetimi)
-- **CSS Custom Properties** (öğrenci numarasından türetilen renk teması)
-
-## Proje Yapısı
-
-```
-frontend/src/
-├── components/
-│   ├── events/     → EventCard, EventDetail, EventFilter, EventList
-│   ├── forms/      → EventForm (doğrulamalı)
-│   └── layout/     → Header (dinamik başlık), Navigation, Footer
-├── context/        → EventsContext (CRUD işlemleri)
-├── data/           → events.ts (6 başlangıç etkinliği)
-├── pages/          → 10 sayfa bileşeni
-├── types/          → CampusEvent, EventFormData, EventFormErrors
-└── utils/          → format-date, filter-events, validate-event
-```
 
 Hasan Basri Kaplan · 2311012812 · 2026

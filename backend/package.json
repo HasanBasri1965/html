@@ -5,15 +5,17 @@
   "main": "src/server.js",
   "scripts": {
     "dev": "node --watch src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "seed": "node src/seed.js"
   },
   "keywords": [],
   "author": "Hasan Basri Kaplan",
   "license": "ISC",
-  "description": "Kampüs Etkinlikleri - Sprint 7 Express REST API",
+  "description": "Kampüs Etkinlikleri - Sprint 8 Express REST API with MongoDB & Mongoose",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "mongoose": "^9.12.2"
   }
 }

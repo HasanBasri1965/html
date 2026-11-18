@@ -1,8 +1,7 @@
-// src/data/events.js
+// src/data/seed-events.js
 
-export const events = [
+export const seedEvents = [
   {
-    id: "event-1",
     title: "Bilişim ve Kariyer Zirvesi 2026",
     category: "Seminer",
     capacity: 120,
@@ -12,7 +11,6 @@ export const events = [
     description: "Yazılım sektörünün öncü mühendisleriyle kariyer planlaması ve staj olanakları üzerine kapsamlı seminer."
   },
   {
-    id: "event-2",
     title: "Mobil Uygulama Geliştirme Atölyesi",
     category: "Atölye",
     capacity: 25,
@@ -22,7 +20,6 @@ export const events = [
     description: "React Native ve Expo kullanarak sıfırdan mobil uygulama prototipi hazırlama atölyesi."
   },
   {
-    id: "event-3",
     title: "Bulut Bilişim ve DevOps Söyleşisi",
     category: "Söyleşi",
     capacity: 60,
@@ -32,7 +29,6 @@ export const events = [
     description: "Modern bulut mimarileri, Docker konteyner yönetimi ve CI/CD süreçleri üzerine deneyim paylaşımı."
   },
   {
-    id: "event-4",
     title: "Full-Stack Web Geliştirme Atölyesi",
     category: "Atölye",
     capacity: 35,
@@ -42,7 +38,6 @@ export const events = [
     description: "Node.js, Express ve REST API temelleriyle backend servisleri inşa etme uygulaması."
   },
   {
-    id: "event-5",
     title: "Yapay Zeka ve Veri Bilimi Sempozyumu",
     category: "Seminer",
     capacity: 150,
@@ -52,7 +47,6 @@ export const events = [
     description: "Makine öğrenimi modelleri ve büyük dil modellerinin mühendislikteki güncel uygulama alanları."
   },
   {
-    id: "event-6",
     title: "Açık Kaynak Hackathon ve Kodlama Maratonu",
     category: "Yarışma",
     capacity: 40,

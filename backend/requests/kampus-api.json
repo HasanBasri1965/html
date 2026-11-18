@@ -5,19 +5,54 @@
     "description": "Kampüs Etkinlikleri - Sprint 8 MongoDB & Mongoose REST API Test İstekleri",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "firstEventId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "createdEventId",
+      "value": "",
+      "type": "string"
+    }
+  ],
   "item": [
     {
       "name": "GET 1 Health",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Durum kodu 200 OK dönmeli\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Sağlık kontrolü status: ok ve student no doğru dönmeli\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.status).to.eql(\"ok\");",
+              "    pm.expect(jsonData.student).to.eql(\"2311012812\");",
+              "    pm.expect(jsonData).to.have.property(\"time\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:3000/health",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/health",
           "host": [
-            "localhost"
+            "{{baseUrl}}"
           ],
-          "port": "3000",
           "path": [
             "health"
           ]
@@ -27,16 +62,36 @@
     },
     {
       "name": "GET 2 Etkinlik listesi",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Durum kodu 200 OK dönmeli\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Etkinlikler listesi dizi olarak dönmeli ve en az 6 kayıt içermeli\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.be.an(\"array\");",
+              "    pm.expect(jsonData.length).to.be.at.least(6);",
+              "    if (jsonData.length > 0) {",
+              "        pm.collectionVariables.set(\"firstEventId\", jsonData[0]._id);",
+              "    }",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:3000/events",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/events",
           "host": [
-            "localhost"
+            "{{baseUrl}}"
           ],
-          "port": "3000",
           "path": [
             "events"
           ]
@@ -46,36 +101,119 @@
     },
     {
       "name": "GET 3 Tek etkinlik",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Eğer firstEventId henüz atanmamışsa varsayılan geçerli bir id ayarla",
+              "if (!pm.collectionVariables.get(\"firstEventId\")) {",
+              "    pm.collectionVariables.set(\"firstEventId\", \"6afd530915f901f6df42f075\");",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Durum kodu 200 OK dönmeli\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Tekil etkinlik bilgileri eksiksiz dönmeli\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"_id\");",
+              "    pm.expect(jsonData).to.have.property(\"title\");",
+              "    pm.expect(jsonData).to.have.property(\"category\");",
+              "    pm.expect(jsonData).to.have.property(\"date\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:3000/events/6afd530915f901f6df42f075",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/events/{{firstEventId}}",
           "host": [
-            "localhost"
+            "{{baseUrl}}"
           ],
-          "port": "3000",
           "path": [
             "events",
-            "6afd530915f901f6df42f075"
+            "{{firstEventId}}"
           ]
         }
       },
       "response": []
     },
     {
-      "name": "GET 4 Olmayan etkinlik (404)",
+      "name": "GET 4 Olmayan etkinlik (Rastgele ID 404)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Biçimi doğru ama veritabanında olmayan id için 404 Not Found dönmeli\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test(\"Hata mesajı 'Event not found' olmalı\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.error.message).to.eql(\"Event not found\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:3000/events/111111",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/events/507f1f77bcf86cd799439011",
           "host": [
-            "localhost"
+            "{{baseUrl}}"
           ],
-          "port": "3000",
+          "path": [
+            "events",
+            "507f1f77bcf86cd799439011"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET 5 Geçersiz ID formatı (404)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Geçersiz formatlı id için 500 değil 404 dönmeli\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test(\"Hata mesajı 'Event not found' olmalı\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.error.message).to.eql(\"Event not found\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/events/111111",
+          "host": [
+            "{{baseUrl}}"
+          ],
           "path": [
             "events",
             "111111"
@@ -85,7 +223,28 @@
       "response": []
     },
     {
-      "name": "POST 5 Etkinlik oluştur (201)",
+      "name": "POST 6 Etkinlik oluştur (201)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Durum kodu 201 Created dönmeli\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "pm.test(\"Oluşturulan etkinlik _id ve createdAt içermeli\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"_id\");",
+              "    pm.expect(jsonData).to.have.property(\"createdAt\");",
+              "    pm.expect(jsonData.title).to.eql(\"Git ve GitHub Atölyesi\");",
+              "    pm.collectionVariables.set(\"createdEventId\", jsonData._id);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
       "request": {
         "method": "POST",
         "header": [
@@ -97,7 +256,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"title\": \"Git Atölyesi\",\n  \"category\": \"Atölye\",\n  \"capacity\": 30,\n  \"date\": \"2026-12-01\",\n  \"time\": \"14:00\",\n  \"location\": \"Bilgisayar Laboratuvarı 1\",\n  \"description\": \"Git ve GitHub ile ilk adımlar.\"\n}",
+          "raw": "{\n  \"title\": \"Git ve GitHub Atölyesi\",\n  \"category\": \"Atölye\",\n  \"capacity\": 30,\n  \"date\": \"2026-12-01\",\n  \"time\": \"14:00\",\n  \"location\": \"Bilgisayar Laboratuvarı 1\",\n  \"description\": \"Git ve GitHub ile ilk adımlar.\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -105,12 +264,10 @@
           }
         },
         "url": {
-          "raw": "http://localhost:3000/events",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/events",
           "host": [
-            "localhost"
+            "{{baseUrl}}"
           ],
-          "port": "3000",
           "path": [
             "events"
           ]
@@ -119,7 +276,26 @@
       "response": []
     },
     {
-      "name": "POST 6 Eksik veri (400)",
+      "name": "POST 7 Eksik veri (400)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Eksik zorunlu alanlarda durum kodu 400 Bad Request dönmeli\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "",
+              "pm.test(\"Doğrulama hata nesnesi dönmeli\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"error\");",
+              "    pm.expect(jsonData.error.message).to.be.a(\"string\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
       "request": {
         "method": "POST",
         "header": [
@@ -139,12 +315,10 @@
           }
         },
         "url": {
-          "raw": "http://localhost:3000/events",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/events",
           "host": [
-            "localhost"
+            "{{baseUrl}}"
           ],
-          "port": "3000",
           "path": [
             "events"
           ]

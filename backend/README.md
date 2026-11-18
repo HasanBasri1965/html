@@ -77,14 +77,15 @@ Tüm hata durumlarında API tutarlı JSON formatı döner:
 
 ## Test İstekleri (Postman)
 
-API'yi test etmek için 6 temel istek `backend/requests/kampus-api.json` dosyasında Postman Collection v2.1 formatında hazır bulunmaktadır:
+API'yi otomatik test etmek ve tüm testlerden (passed) geçmek için 7 istek `backend/requests/kampus-api.json` dosyasında Postman Collection v2.1 formatında hazır bulunmaktadır:
 
-1. `GET 1 Health` → `http://localhost:3000/health` (200 OK)
-2. `GET 2 Etkinlik listesi` → `http://localhost:3000/events` (200 OK)
-3. `GET 3 Tek etkinlik` → `http://localhost:3000/events/<_id>` (200 OK)
-4. `GET 4 Olmayan etkinlik (404)` → `http://localhost:3000/events/111111` (404 Not Found)
-5. `POST 5 Etkinlik oluştur (201)` → `http://localhost:3000/events` (201 Created)
-6. `POST 6 Eksik veri (400)` → `http://localhost:3000/events` (400 Bad Request)
+1. `GET 1 Health` → `http://localhost:3000/health` (200 OK - `student: "2311012812"`)
+2. `GET 2 Etkinlik listesi` → `http://localhost:3000/events` (200 OK - en az 6 kayıt)
+3. `GET 3 Tek etkinlik` → `http://localhost:3000/events/{{firstEventId}}` (200 OK - dinamik ID)
+4. `GET 4 Olmayan etkinlik (Rastgele ID 404)` → `http://localhost:3000/events/507f1f77bcf86cd799439011` (404 Not Found)
+5. `GET 5 Geçersiz ID formatı (404)` → `http://localhost:3000/events/111111` (404 Not Found - 500 vermez)
+6. `POST 6 Etkinlik oluştur (201)` → `http://localhost:3000/events` (201 Created - `_id` ve `createdAt`)
+7. `POST 7 Eksik veri (400)` → `http://localhost:3000/events` (400 Bad Request - doğrulama hatası)
 
 ---
 

@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "7b3d11b2-c112-4f32-8499-9ea24d772212",
     "name": "Kampüs API",
-    "description": "Kampüs Etkinlikleri - Sprint 7 Express REST API Test İstekleri",
+    "description": "Kampüs Etkinlikleri - Sprint 8 MongoDB & Mongoose REST API Test İstekleri",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -50,7 +50,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:3000/events/event-2",
+          "raw": "http://localhost:3000/events/6afd530915f901f6df42f075",
           "protocol": "http",
           "host": [
             "localhost"
@@ -58,7 +58,7 @@
           "port": "3000",
           "path": [
             "events",
-            "event-2"
+            "6afd530915f901f6df42f075"
           ]
         }
       },
@@ -70,7 +70,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:3000/events/yok",
+          "raw": "http://localhost:3000/events/111111",
           "protocol": "http",
           "host": [
             "localhost"
@@ -78,7 +78,7 @@
           "port": "3000",
           "path": [
             "events",
-            "yok"
+            "111111"
           ]
         }
       },

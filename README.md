@@ -1,4 +1,4 @@
-# Kampüs Etkinlikleri — Sprint 5 & 7
+# Kampüs Etkinlikleri — Full-Stack (Sprint 5 & Sprint 8)
 
 **Frontend Canlı Link (Vercel):** https://hasanbasrikaplan-frontend.vercel.app/
 
@@ -8,8 +8,6 @@
 
 ## Proje Yapısı
 
-Bu repoda iki ana uygulama bulunmaktadır:
-
 ```
 kampus-etkinlik/
 ├── frontend/                  # React + TypeScript + Vite (localhost:5173)
@@ -18,24 +16,27 @@ kampus-etkinlik/
 │       ├── context/           # EventsContext (Global State & CRUD)
 │       ├── data/              # Başlangıç etkinlik verileri
 │       └── pages/             # 10 React Router sayfası
-├── backend/                   # Node.js + Express REST API (localhost:3000)
+├── backend/                   # Node.js + Express + MongoDB REST API (localhost:3000)
 │   ├── src/
 │   │   ├── app.js             # Express app, middleware ve route bağlantıları
-│   │   ├── server.js          # Port dinleme ve .env yapılandırması
+│   │   ├── server.js          # DB bağlantısı ve port dinleme
+│   │   ├── seed.js            # MongoDB seed çalıştırma script'i
+│   │   ├── config/            # database.js (Mongoose bağlantı modülü)
+│   │   ├── models/            # event-model.js (Mongoose Schema & Model)
 │   │   ├── routes/            # event-routes.js
-│   │   ├── controllers/       # event-controller.js
-│   │   └── data/              # events.js (Bellek içi özgün etkinlikler)
+│   │   ├── controllers/       # event-controller.js (MongoDB CRUD metodları)
+│   │   └── data/              # seed-events.js (Özgün başlangıç etkinlikleri)
 │   ├── requests/              # kampus-api.json (Postman Collection v2.1)
-│   ├── .env.example           # Örnek çevre değişkenleri
+│   ├── .env.example           # Örnek çevre değişkenleri (PORT & MONGODB_URI)
 │   ├── .gitignore             # node_modules ve .env koruması
 │   └── README.md              # Backend REST API sözleşmesi ve dokümantasyonu
 ```
 
 ---
 
-## Backend — Sprint 7 (Express REST API)
+## Backend — Sprint 8 (MongoDB ve Mongoose)
 
-Backend, etkinlik verilerini JSON formatında sunan Node.js + Express REST API servisidir.
+Backend, verileri MongoDB Atlas üzerinde kalıcı olarak saklayan Node.js + Express + Mongoose REST API servisidir.
 
 ### REST API Uç Noktaları
 
@@ -43,21 +44,23 @@ Backend, etkinlik verilerini JSON formatında sunan Node.js + Express REST API s
 |:---|:---|:---|:---|
 | **GET** | `/health` | Sağlık kontrolü ve öğrenci no (`2311012812`) | `200 OK` |
 | **GET** | `/events` | Tüm etkinlik listesi (filtreleme: `?category=...`) | `200 OK` |
-| **GET** | `/events/:id` | Tekil etkinlik detayı | `200 OK` / `404 Not Found` |
-| **POST** | `/events` | Yeni etkinlik ekleme | `201 Created` / `400 Bad Request` |
+| **GET** | `/events/:id` | MongoDB `_id` ile tekil etkinlik detayı | `200 OK` / `404 Not Found` |
+| **POST** | `/events` | Yeni etkinlik ekleme (Schema doğrulama) | `201 Created` / `400 Bad Request` |
 
 ### Backend Çalıştırma
+
 ```bash
 cd backend
 npm install
-npm run dev     # http://localhost:3000
+npm run seed  # Veritabanını 6 özgün etkinlikle doldurur
+npm run dev   # Geliştirme sunucusunu başlatır
 ```
-
-Postman test koleksiyonu: `backend/requests/kampus-api.json`
 
 ---
 
-## Frontend — Sprint 5 (React Router ile 10 Sayfa)
+## Frontend — Sprint 5 (React + TypeScript + React Router)
+
+Bu projede `react-router-dom` v7 kullanılarak **10 ayrı route** tanımlanmıştır:
 
 | # | Yol (Path) | Sayfa Bileşeni | Açıklama |
 |---|-----------|----------------|----------|

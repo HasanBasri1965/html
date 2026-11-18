@@ -1,6 +1,6 @@
-# Kampüs Etkinlikleri — Sprint 7 (Express REST API)
+# Kampüs Etkinlikleri — Sprint 8 (MongoDB ve Mongoose)
 
-Bu proje, Kampüs Etkinlikleri uygulamasının Node.js ve Express ile geliştirilmiş REST API backend servisidir.
+Bu proje, Kampüs Etkinlikleri uygulamasının Node.js, Express ve MongoDB / Mongoose ile geliştirilmiş REST API backend servisidir.
 
 ## Kurulum ve Çalıştırma
 
@@ -15,9 +15,19 @@ Kök dizindeki `.env.example` dosyasını kopyalayarak `.env` oluşturun:
 ```bash
 cp .env.example .env
 ```
-Varsayılan olarak `PORT=3000` kullanılır.
+`.env` dosyasında aşağıdaki değişkenler tanımlanmalıdır:
+```env
+PORT=3000
+MONGODB_URI=mongodb+srv://<kullanıcı>:<şifre>@<cluster-adresi>/kampus
+```
 
-### 3. Geliştirme Sunucusunu Başlatma
+### 3. Veritabanını Örnek Veriyle Doldurma (Seed)
+Başlangıç verilerini (6 adet özgün etkinlik) veritabanına eklemek için:
+```bash
+npm run seed
+```
+
+### 4. Geliştirme Sunucusunu Başlatma
 Node.js `--watch` modu ile otomatik yeniden başlatan dev komutu:
 ```bash
 npm run dev
@@ -29,30 +39,29 @@ npm start
 ```
 
 Sunucu ayağa kalktığında:
-`API: http://localhost:3000`
+- MongoDB bağlandı: `<cluster-adresi>/kampus`
+- API: `http://localhost:3000`
 
 ---
 
 ## REST API Sözleşmesi
 
-| Yöntem (Method) | Uç Nokta (Endpoint) | Amaç | Başarılı | Hata | Durum |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **GET** | `/health` | Sunucu sağlık kontrolü ve öğrenci no | `200 OK` | — | Bu sprint |
-| **GET** | `/events` | Tüm etkinlik listesini getir (isteğe bağlı `?category=...`) | `200 OK` | — | Bu sprint |
-| **GET** | `/events/:id` | ID'ye göre tek bir etkinliği getir | `200 OK` | `404 Not Found` | Bu sprint |
-| **POST** | `/events` | Yeni etkinlik oluştur (JSON body) | `201 Created` | `400 Bad Request` | Bu sprint |
-| **PATCH** | `/events/:id` | Etkinlik güncelle | `200 OK` | `400 / 404` | Sprint 9 |
-| **DELETE** | `/events/:id` | Etkinlik sil | `204 No Content`| `404 Not Found` | Sprint 9 |
+| Yöntem (Method) | Uç Nokta (Endpoint) | Amaç | Başarılı | Hata |
+| :--- | :--- | :--- | :--- | :--- |
+| **GET** | `/health` | Sunucu sağlık kontrolü ve öğrenci no | `200 OK` | — |
+| **GET** | `/events` | Tüm etkinlik listesini getir (isteğe bağlı `?category=...`) | `200 OK` | — |
+| **GET** | `/events/:id` | MongoDB `_id`sine göre tek bir etkinliği getir | `200 OK` | `404 Not Found` |
+| **POST** | `/events` | Yeni etkinlik oluştur (JSON body) | `201 Created` | `400 Bad Request` |
 
 ---
 
 ## Durum Kodları (HTTP Status Codes)
 
 - **200 OK:** İstek başarıyla karşılandı.
-- **201 Created:** Yeni kayıt başarıyla oluşturuldu.
-- **204 No Content:** İçerik yok (silme işlemi).
-- **400 Bad Request:** Eksik veya geçersiz veri (ör. zorunlu alanlar `title`, `category`, `date`).
-- **404 Not Found:** Kaynak veya rota bulunamadı.
+- **201 Created:** Yeni kayıt başarıyla oluşturuldu (`_id`, `createdAt`, `updatedAt` ile döner).
+- **400 Bad Request:** Şema doğrulama hatası (eksik zorunlu alanlar `title`, `category`, `date` veya kısıt ihlali).
+- **404 Not Found:** Kaynak veya rota bulunamadı (geçersiz veya bulunamayan `_id` için 404 döner, 500 vermez).
+- **500 Internal Server Error:** Sunucu içi beklenmeyen hata (hata yakalayıcı middleware ile yönetilir).
 
 ### Standart Hata Yanıtı Formatı
 Tüm hata durumlarında API tutarlı JSON formatı döner:
@@ -72,8 +81,8 @@ API'yi test etmek için 6 temel istek `backend/requests/kampus-api.json` dosyas�
 
 1. `GET 1 Health` → `http://localhost:3000/health` (200 OK)
 2. `GET 2 Etkinlik listesi` → `http://localhost:3000/events` (200 OK)
-3. `GET 3 Tek etkinlik` → `http://localhost:3000/events/event-2` (200 OK)
-4. `GET 4 Olmayan etkinlik (404)` → `http://localhost:3000/events/yok` (404 Not Found)
+3. `GET 3 Tek etkinlik` → `http://localhost:3000/events/<_id>` (200 OK)
+4. `GET 4 Olmayan etkinlik (404)` → `http://localhost:3000/events/111111` (404 Not Found)
 5. `POST 5 Etkinlik oluştur (201)` → `http://localhost:3000/events` (201 Created)
 6. `POST 6 Eksik veri (400)` → `http://localhost:3000/events` (400 Bad Request)
 
